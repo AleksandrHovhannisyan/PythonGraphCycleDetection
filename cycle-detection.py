@@ -5,14 +5,16 @@ neighbors = { 'D':['S', 'T'], 'R':['A'], 'A':['S'], 'C':['S'],
                  'V' : ['G'] }
 
 
-# For use by the algorithm
+# Used by the algorithm to keep track of how many times each node has been visited
 L = { node:0 for node in neighbors.keys() }
 
+# Used by the algorithm to compare the node in the current iteration to the original one
+startingNode = ''
 
 #====================================================================
 # This is the algorithm itself. Determines if startingNode is in cycle.
 #====================================================================
-def isPartOfCycle(previousNode, currentNode, startingNode):
+def isPartOfCycle(previousNode, currentNode):
     # Mark the node as having been visited
     L[currentNode] += 1
 
@@ -23,16 +25,16 @@ def isPartOfCycle(previousNode, currentNode, startingNode):
     if L[currentNode] == 2 and currentNode == startingNode:
         return True
 
-    # If a node was encountered twice an it's not the starting one, no cycle
+    # If a node was encountered twice an it's not the starting one, no cycle (e.g., node 'B')
     elif L[currentNode] == 2 and currentNode != startingNode:
         return False
     
     # Repeat for neighbors... and neighbors... and neighbors
     for neighbor in neighbors[currentNode]:
-        if L[neighbor] == 2 or isPartOfCycle(currentNode, neighbor, startingNode):
+        if L[neighbor] == 2 or isPartOfCycle(currentNode, neighbor):
             return True
     
-    # Non-cycle termination
+    # Non-cycle termination (anything but the situation like the one for 'B')
     return False
 
 
@@ -44,9 +46,10 @@ def runAlgorithm(node):
     for key in L.keys():
         L[key] = 0
     # Keep track of the starting node
+    global startingNode 
     startingNode = node
     # Initiate algo
-    result = isPartOfCycle(node, node, startingNode)
+    result = isPartOfCycle(node, node)
     print("{} is part of a cycle: {}".format(node, result))
     return result
 
