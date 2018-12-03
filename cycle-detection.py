@@ -89,5 +89,6 @@ def main():
                 removeNode(node)
         # For readability
         print()
+    print("Cycle(s): {}".format(neighbors))
 
 main()
