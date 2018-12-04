@@ -4,34 +4,39 @@ neighbors = { 'D':['S', 'T'], 'R':['A'], 'A':['S'], 'C':['S'],
                  'T':['E'], 'B':['T'], 'E':['V'],
                  'V' : ['G'] }
 
+# Dict used by algorithm to keep track of how many times each node has been visited
+visitedCount = {}
 
-# Used by the algorithm to keep track of how many times each node has been visited
-L = { node:0 for node in neighbors.keys() }
-
-# Used by the algorithm to compare the node in the current iteration to the original one
+# Used by algorithm to compare the node in the current iteration to the starting node
 startingNode = ''
 
 #====================================================================
 # This is the algorithm itself. Determines if startingNode is in cycle.
 #====================================================================
 def isPartOfCycle(previousNode, currentNode):
-    # Mark the node as having been visited
-    L[currentNode] += 1
+    # To avoid doing this at the start of the algorithm for all graph nodes.
+    # That is, we only do this for nodes in the current "path" we're following.
+    if currentNode not in visitedCount:
+        visitedCount[currentNode] = 0
 
-    # Info, for debugging purposes
-    print("{} -> {}: node {} has been encountered {} times.".format(previousNode, currentNode, currentNode, L[currentNode]))
+    # Mark the node as having been visited one more time
+    visitedCount[currentNode] += 1
 
-    # If the node was encountered twice and it's the starting one, cycle
-    if L[currentNode] == 2 and currentNode == startingNode:
-        return True
+    # This stuff is for debugging purposes only and tracing the algorithm
+    if previousNode == currentNode:
+        print("Starting at {}. ".format(currentNode), end="")
+    else:
+        print("{} -> {}: ".format(previousNode, currentNode), end="")
+    print("Node {} has been encountered {} times.".format(currentNode, visitedCount[currentNode]))
 
-    # If a node was encountered twice an it's not the starting one, no cycle (e.g., node 'B')
-    elif L[currentNode] == 2 and currentNode != startingNode:
-        return False
+    # If the node was encountered twice...
+    if visitedCount[currentNode] == 2:
+        # Return True only if we're back to the starting node, in which case it's a cycle
+        return currentNode == startingNode
     
     # Repeat for neighbors... and neighbors... and neighbors
     for neighbor in neighbors[currentNode]:
-        if L[neighbor] == 2 or isPartOfCycle(currentNode, neighbor):
+        if (neighbor in visitedCount and visitedCount[neighbor] == 2) or isPartOfCycle(currentNode, neighbor):
             return True
     
     # Non-cycle termination (anything but the situation like the one for 'B')
@@ -43,8 +48,7 @@ def isPartOfCycle(previousNode, currentNode):
 #====================================================================
 def runAlgorithm(node):
     # Reset L each time
-    for key in L.keys():
-        L[key] = 0
+    visitedCount.clear()
     # Keep track of the starting node
     global startingNode 
     startingNode = node
