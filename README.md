@@ -1,12 +1,18 @@
 # Python Graph Cycle Detection
 
-A simple Python program for cycle detection. Below is the corresponding image of the graph [Modern Operating Systems, 4th ed]. The left graph shows the original. The right graph shows the reduced, identified cycle.
+A simple Python program to detect cycles in a directed graph. Below is a sample image of the graph used for testing [source: Modern Operating Systems, 4th ed]. The left image shows the original nodes in the graph. The right image shows the reduced graph with all identified cycles.
 
 ![Image of a graph from Modern Operating Systems, Chapter 6](graph.PNG)
 
-### Running the script
+### Using the Class
 
-You can replace the existing `neighbors` dictionary with your own nodes or
-simply run the script as is. 
+To use `CycleFinder` in your code, simply place `cycle_finder.py` in your project directory and include the following import at the top of your script:
 
-Note: if a node does not have any edges originating from it, be sure to still specify its value as the empty set, `[]`, in this dictionary.
+`from cycle_finder import CycleFinder`
+
+### Testing
+
+You can replace the existing `graph` dictionary in `cycle_test.py` with your own nodes or simply run the script as is.
+
+Note: If a node does not have any edges originating from it, be sure to still specify its value as an empty list, `[]`, in the dictionary. Consider node 'S' in
+the image above as an example.
