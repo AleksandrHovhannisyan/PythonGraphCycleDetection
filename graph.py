@@ -85,10 +85,10 @@ class UndirectedGraph(Graph):
         '''
         if start not in self.graph:
             self.graph[start] = list()
-        if end not in self.graph:
-            self.graph[end] = list()
         if end == None or end in self.graph[start]:
             return
+        elif end not in self.graph:
+            self.graph[end] = list()
         self.graph[start].append(end)
         self.graph[end].append(start)
 
