@@ -11,13 +11,14 @@ The `CycleFinder` class expects to be fed an instance of `DirectedGraph` or `Und
 You'll need the following imports:
 
 `from cycle_finder import CycleFinder`
+
 `from graph import DirectedGraph, UndirectedGraph`
 
 ### Testing
 
-See `test_graph.py` for an example unit test utilizing the `unittest` library.
+See `test_graph.py` for an example unit test of the `Graph` classes utilizing the `unittest` library.
 
-See the bottom of `cycle_finder.py` for an example usage of all these classes. Note that CycleFinder *will* modify the underlying dictionary once the `findCycles` method is invoked.
+See the bottom of `cycle_finder.py` for an example usage of all these classes to identify the cycle in the image above. Note that CycleFinder *will* modify the underlying dictionary once the `findCycles` method is invoked.
 
 Note: If a node does not have any edges originating from it (such as `S` in the sample image provided above), do one of the following:
 
