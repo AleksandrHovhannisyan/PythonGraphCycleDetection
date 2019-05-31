@@ -29,6 +29,10 @@ class Graph(ABC):
             return None
         return self.graph[node]
 
+    def keys(self):
+        ''' Returns a list of this Graph's keys '''
+        return self.graph.keys()
+
 
 
 class DirectedGraph(Graph):
