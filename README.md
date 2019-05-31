@@ -12,7 +12,5 @@ To use `CycleFinder` in your code, simply place `cycle_finder.py` in your projec
 
 ### Testing
 
-You can replace the existing `graph` dictionary in `cycle_test.py` with your own nodes or simply run the script as is.
-
 Note: If a node does not have any edges originating from it, be sure to still specify its value as an empty list, `[]`, in the dictionary. Consider node 'S' in
 the image above as an example.
