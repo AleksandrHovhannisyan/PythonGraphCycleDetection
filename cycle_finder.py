@@ -1,5 +1,4 @@
 from graph import DirectedGraph
-from graph import UndirectedGraph
 
 
 class CycleFinder:
@@ -9,7 +8,7 @@ class CycleFinder:
         Initializes this CycleFinder.
 
         Parameters:
-        graph - an instance of DirectedGraph or UndirectedGraph
+        graph - an instance of DirectedGraph
         '''
         self.graph = graph
         self.startingNode = None
@@ -94,8 +93,8 @@ if __name__ == '__main__':
                  'T':['E'], 'B':['T'], 'E':['V'],
                  'V' : ['G'] }
 
-    ugraph = UndirectedGraph(graph_dict)
-    print("Original graph: {}\n".format(ugraph))
-    cycleFinder = CycleFinder(ugraph)
+    dgraph = DirectedGraph(graph_dict)
+    print("Original graph: {}\n".format(dgraph))
+    cycleFinder = CycleFinder(dgraph)
     cycleFinder.findCycles()
-    print("Cycle(s): {}".format(ugraph))
+    print("Cycle(s): {}".format(dgraph))
