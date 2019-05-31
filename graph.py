@@ -49,7 +49,7 @@ class DirectedGraph(Graph):
         '''
         if start not in self.graph:
             self.graph[start] = list()
-        elif end in self.graph[start]:
+        elif end == None or end in self.graph[start]:
             return
         self.graph[start].append(end)
 
@@ -87,7 +87,7 @@ class UndirectedGraph(Graph):
             self.graph[start] = list()
         if end not in self.graph:
             self.graph[end] = list()
-        if end in self.graph[start]:
+        if end == None or end in self.graph[start]:
             return
         self.graph[start].append(end)
         self.graph[end].append(start)
